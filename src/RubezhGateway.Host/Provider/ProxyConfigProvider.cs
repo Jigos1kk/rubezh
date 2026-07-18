@@ -34,7 +34,7 @@ namespace RubezhGateway.Host.Provider
                         ClusterId = "backend-api-cluster",
                         Destinations = new Dictionary<string, DestinationConfig>
                         {
-                            { "destination1", new DestinationConfig { Address = "https://github.com/" } }
+                            { "destination1", new DestinationConfig { Address = "http://localhost:3000" } }
                         }
                     },
                 }

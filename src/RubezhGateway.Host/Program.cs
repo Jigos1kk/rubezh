@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using RubezhGateway.Engine.Middleware;
 using RubezhGateway.Host.Provider;
 using Yarp.ReverseProxy.Configuration;
 
@@ -14,14 +15,7 @@ builder.Services.AddReverseProxy()
 
 var app = builder.Build();
 
-app.Use(async (context, next) => {
-    var stopwatch = Stopwatch.StartNew();
-    context.Request.Headers["X-Rubezh-Gateway"] = "v1.0";
-    Console.WriteLine($"[Rubezh] -> {context.Request.Method} {context.Request.Path}");
-    await next(context); 
-    stopwatch.Stop();
-    Console.WriteLine($"[Rubezh] <- {context.Response.StatusCode} | Time: {stopwatch.ElapsedMilliseconds}ms");
-});
+app.UseDefaultMiddleware();
 
 app.MapReverseProxy();
 
